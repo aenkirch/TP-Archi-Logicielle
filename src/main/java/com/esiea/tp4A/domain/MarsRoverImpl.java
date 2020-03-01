@@ -3,6 +3,8 @@ package com.esiea.tp4A.domain;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 
+import com.esiea.tp4A.com.esiea.tp4A.domain.Direction;
+
 public class MarsRoverImpl implements MarsRover {
 	
 	private Position position;
