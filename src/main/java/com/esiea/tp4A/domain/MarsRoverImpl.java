@@ -31,7 +31,6 @@ public class MarsRoverImpl implements MarsRover {
     				case 'f' :
     					if(position.getDirection() == Direction.NORTH) {
     						setPosition(Position.of(position.getX(), position.getY() + 1, position.getDirection()));
-    						System.out.println("test");
     					}else if(position.getDirection() == Direction.EAST) {
     						setPosition(Position.of(position.getX() + 1, position.getY(), position.getDirection()));
     					}else if(position.getDirection() == Direction.SOUTH) {
@@ -76,7 +75,7 @@ public class MarsRoverImpl implements MarsRover {
     				default :
     					break;
     			}
-    				
+    			ci.next();
     		}
     	}
         return Position.of(position.getX(), position.getY(), position.getDirection());
