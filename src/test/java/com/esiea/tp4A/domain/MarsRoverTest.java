@@ -2,25 +2,12 @@ package com.esiea.tp4A.domain;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-
-import com.esiea.tp4A.domain.Direction;
-import com.esiea.tp4A.domain.MarsRover;
-import com.esiea.tp4A.domain.MarsRoverImpl;
-import com.esiea.tp4A.domain.Position.FixedPosition;
 
 
 class MarsRoverTest {
-/*@ParameterizedTest
-@CsvSource({
-	"f, 1, 0, NORTH",
-	"ff, 2, 0, NORTH",
-	"r, 0, 0, EAST",
-	"l, 0, 0, WEST",
-	"ll, 0, 0, SOUTH",
-})*/
-	
+
+
+
 	
 	final MarsRover marsrover = new MarsRoverImpl().initialize(Position.of(0, 0, Direction.NORTH));
 	
