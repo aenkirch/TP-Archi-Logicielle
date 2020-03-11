@@ -6,8 +6,9 @@ import java.text.StringCharacterIterator;
 public class MarsRoverImpl implements MarsRover {
 	
 	private Position position;
-		
-	public MarsRover initialize(Position position) {
+
+
+    public MarsRover initialize(Position position) {
         setPosition(position);
 		return this;
     }
@@ -21,68 +22,54 @@ public class MarsRoverImpl implements MarsRover {
     }
 
     public Position move(String command) {
-    	if(command.isEmpty()) {
-    		return Position.of(0, 0, Direction.NORTH);
-    	}else {
-    		CharacterIterator ci = new StringCharacterIterator(command);
-    		
-    		while(ci.current() != CharacterIterator.DONE) {
-    			switch(ci.current()) {
-    				case 'f' :
-    					if(position.getDirection() == Direction.NORTH) {
-    						setPosition(Position.of(position.getX(), position.getY() + 1, position.getDirection()));
-    					}else if(position.getDirection() == Direction.EAST) {
-    						setPosition(Position.of(position.getX() + 1, position.getY(), position.getDirection()));
-    					}else if(position.getDirection() == Direction.SOUTH) {
-    						setPosition(Position.of(position.getX(), position.getY() - 1, position.getDirection()));
-    					}else if(position.getDirection() == Direction.WEST) {
-    						setPosition(Position.of(position.getX() - 1, position.getY(), position.getDirection()));
-    					}
-    					break;
-    				case 'b' :
-    					if(position.getDirection() == Direction.NORTH) {
-    						setPosition(Position.of(position.getX(), position.getY() - 1, position.getDirection()));
-    					}else if(position.getDirection() == Direction.EAST) {
-    						setPosition(Position.of(position.getX() - 1, position.getY(), position.getDirection()));
-    					}else if(position.getDirection() == Direction.SOUTH) {
-    						setPosition(Position.of(position.getX(), position.getY() + 1, position.getDirection()));
-    					}else if(position.getDirection() == Direction.WEST) {
-    						setPosition(Position.of(position.getX() + 1, position.getY(), position.getDirection()));
-    					}
-    					break;
-    				case 'r' :
-    					if(position.getDirection() == Direction.NORTH) {
-    						setPosition(Position.of(position.getX(), position.getY(), Direction.EAST));
-    					}else if(position.getDirection() == Direction.EAST) {
-    						setPosition(Position.of(position.getX(), position.getY(), Direction.SOUTH));
-    					}else if(position.getDirection() == Direction.SOUTH) {
-    						setPosition(Position.of(position.getX(), position.getY(), Direction.WEST));
-    					}else if(position.getDirection() == Direction.WEST) {
-    						setPosition(Position.of(position.getX(), position.getY(), Direction.NORTH));
-    					}
-    					break;
-    				case 'l' :
-    					if(position.getDirection() == Direction.NORTH) {
-    						setPosition(Position.of(position.getX(), position.getY(), Direction.WEST));
-    					}else if(position.getDirection() == Direction.EAST) {
-    						setPosition(Position.of(position.getX(), position.getY(), Direction.NORTH));
-    					}else if(position.getDirection() == Direction.SOUTH) {
-    						setPosition(Position.of(position.getX(), position.getY(), Direction.EAST));
-    					}else if(position.getDirection() == Direction.WEST) {
-    						setPosition(Position.of(position.getX(), position.getY(), Direction.SOUTH));
-    					}
-    					break;
-    				default :
-    					break;
-    			}
-    			ci.next();
-    		}
-    	}
+        CharacterIterator ci = new StringCharacterIterator(command);
+
+        while(ci.current() != CharacterIterator.DONE){
+            movement(ci.current());
+            ci.next();
+        }
+
         return Position.of(position.getX(), position.getY(), position.getDirection());
     }
-    
-    public void setPosition(Position posi) {
-    	this.position = posi;
+
+    private void movement(char command){
+        switch(command){
+            case 'f':
+                moveForward();
+                break;
+            case 'b':
+                moveBackward();
+                break;
+            case 'r':
+                moveRightSide();
+                break;
+            case 'l':
+                moveLeftSide();
+                break;
+            default:
+                break;
+        }
     }
 
+    private void moveForward(){
+        setPosition(Position.of(position.getX(), position.getY() + 1, Direction.NORTH));
+    }
+    private void moveBackward(){
+        setPosition(Position.of(position.getX(), position.getY() - 1, Direction.SOUTH));
+    }
+    private void moveRightSide(){
+        setPosition(Position.of(position.getX()+1, position.getY(), Direction.EAST));
+    }
+    private void moveLeftSide(){
+        setPosition(Position.of(position.getX()-1, position.getY(), Direction.WEST));
+    }
+
+    public void setPosition(Position posi) {
+        this.position = posi;
+    }
+
+
+    private Position getPosition() {
+        return this.position;
+    }
 }
