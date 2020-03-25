@@ -25,7 +25,7 @@ class MarsRoverTest {
         Assertions.assertThat(marsrover.move("b"))
             .as("Mars Rover moving backward from origin")
             .extracting(Position::getX, Position::getY, Position::getDirection)
-            .containsExactly(0,-1,Direction.SOUTH);
+            .containsExactly(0,-1,Direction.NORTH);
 	}
 	
 	@Test
@@ -33,7 +33,7 @@ class MarsRoverTest {
         Assertions.assertThat(marsrover.move("l"))
             .as("Mars Rover moving left from origin")
             .extracting(Position::getX, Position::getY, Position::getDirection)
-            .containsExactly(-1,0,Direction.WEST);
+            .containsExactly(0,0,Direction.WEST);
 
 	}
 	
@@ -42,7 +42,7 @@ class MarsRoverTest {
         Assertions.assertThat(marsrover.move("r"))
             .as("Mars Rover moving right from origin")
             .extracting(Position::getX, Position::getY, Position::getDirection)
-            .containsExactly(1,0,Direction.EAST);
+            .containsExactly(0,0,Direction.EAST);
 	}
 	
 	@Test

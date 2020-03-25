@@ -28,8 +28,6 @@ public class MarsRoverImpl implements MarsRover {
             movement(ci.current());
             ci.next();
         }
-        
-        
         return Position.of(position.getX(), position.getY(), position.getDirection());
     }
 
@@ -53,18 +51,50 @@ public class MarsRoverImpl implements MarsRover {
     }
 
     private void moveForward(){
-        setPosition(Position.of(position.getX(), position.getY() + 1, Direction.NORTH));
+    	if(position.getDirection() == Direction.NORTH) {
+    		setPosition(Position.of(position.getX(), position.getY() + 1, position.getDirection()));
+    	}else if(position.getDirection() == Direction.EAST) {
+    		setPosition(Position.of(position.getX() + 1, position.getY(), position.getDirection()));
+    	}else if(position.getDirection() == Direction.SOUTH) {
+    		setPosition(Position.of(position.getX(), position.getY() - 1, position.getDirection()));
+    	}else if(position.getDirection() == Direction.WEST) {
+    		setPosition(Position.of(position.getX() - 1, position.getY(), position.getDirection()));
+    	}
     }
     private void moveBackward(){
-        setPosition(Position.of(position.getX(), position.getY() - 1, Direction.SOUTH));
+        if(position.getDirection() == Direction.NORTH) {
+        	setPosition(Position.of(position.getX(), position.getY() - 1, position.getDirection()));
+        }else if(position.getDirection() == Direction.EAST) {
+        	setPosition(Position.of(position.getX() - 1, position.getY(), position.getDirection()));
+        }else if(position.getDirection() == Direction.SOUTH) {
+        	setPosition(Position.of(position.getX(), position.getY() + 1, position.getDirection()));
+        }else if(position.getDirection() == Direction.WEST) {
+        	setPosition(Position.of(position.getX() + 1, position.getY(), position.getDirection()));
+        }
     }
     
     private void moveRightSide(){
-        setPosition(Position.of(position.getX()+1, position.getY(), Direction.EAST));
+        if(position.getDirection() == Direction.NORTH) {
+        	setPosition(Position.of(position.getX(), position.getY(), Direction.EAST));
+        }else if(position.getDirection() == Direction.EAST) {
+        	setPosition(Position.of(position.getX(), position.getY(), Direction.SOUTH));
+        }else if(position.getDirection() == Direction.SOUTH) {
+        	setPosition(Position.of(position.getX(), position.getY(), Direction.WEST));
+        }else if(position.getDirection() == Direction.WEST) {
+        	setPosition(Position.of(position.getX(), position.getY(), Direction.NORTH));
+        }
     }
     
     private void moveLeftSide(){
-        setPosition(Position.of(position.getX()-1, position.getY(), Direction.WEST));
+        if(position.getDirection() == Direction.NORTH) {
+        	setPosition(Position.of(position.getX(), position.getY(), Direction.WEST));
+        }else if(position.getDirection() == Direction.EAST) {
+        	setPosition(Position.of(position.getX(), position.getY(), Direction.NORTH));
+        }else if(position.getDirection() == Direction.SOUTH) {
+        	setPosition(Position.of(position.getX(), position.getY(), Direction.EAST));
+        }else if(position.getDirection() == Direction.WEST) {
+        	setPosition(Position.of(position.getX(), position.getY(), Direction.SOUTH));
+        }
     }
 
     public void setPosition(Position posi) {
