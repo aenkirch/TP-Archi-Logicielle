@@ -45,6 +45,43 @@ class MarsRoverTest {
             .containsExactly(1,0,Direction.EAST);
 	}
 	
+	@Test
+	void planette_spherique_plus_50_f_moins_50_North() {
+		MarsRover marsSphere = new MarsRoverImpl().initialize(Position.of(50, 0, Direction.NORTH));
+		Assertions.assertThat(marsSphere.move("f"))
+			.as("Mars Rover reviens en x = -50")
+			.extracting(Position::getX, Position::getY, Position::getDirection)
+			.containsExactly(-49, 0, Direction.NORTH);
+	}
+	
+	@Test
+	void planette_spherique_moins_50_b_plus_50_North() {
+		MarsRover marsSphere = new MarsRoverImpl().initialize(Position.of(-50, 0, Direction.NORTH));
+		Assertions.assertThat(marsSphere.move("b"))
+			.as("Mars Rover reviens en x = 50")
+			.extracting(Position::getX, Position::getY, Position::getDirection)
+			.containsExactly(50, 0, Direction.NORTH);
+	}
+	
+	
+	@Test
+	void planette_spherique_plus_50_f_50_moins_East() {
+		MarsRover marsSphere = new MarsRoverImpl().initialize(Position.of(0, 50, Direction.EAST));
+		Assertions.assertThat(marsSphere.move("b"))
+			.as("Mars Rover reviens en y = -50")
+			.extracting(Position::getX, Position::getY, Position::getDirection)
+			.containsExactly(0, -50, Direction.EAST);
+	}
+	
+	@Test
+	void planette_spherique_moins_50_b_plus_50_East() {
+		MarsRover marsSphere = new MarsRoverImpl().initialize(Position.of(0, -50, Direction.EAST));
+		Assertions.assertThat(marsSphere.move("b"))
+			.as("Mars Rover reviens en y = 50")
+			.extracting(Position::getX, Position::getY, Position::getDirection)
+			.containsExactly(0, 50, Direction.EAST);
+	}
+	
 	/*@Test
 	void rover_dont_move_when_bad_command() {
 		Assertions.assertThat(marsrover.move("w"))

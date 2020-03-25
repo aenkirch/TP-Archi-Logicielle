@@ -28,7 +28,7 @@ public interface Position {
 
         @Override
         public int getY() {
-            return y;
+        	return y;
         }
         
         @Override
