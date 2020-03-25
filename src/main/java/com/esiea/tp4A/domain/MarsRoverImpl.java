@@ -28,7 +28,8 @@ public class MarsRoverImpl implements MarsRover {
             movement(ci.current());
             ci.next();
         }
-
+        
+        
         return Position.of(position.getX(), position.getY(), position.getDirection());
     }
 
@@ -57,9 +58,11 @@ public class MarsRoverImpl implements MarsRover {
     private void moveBackward(){
         setPosition(Position.of(position.getX(), position.getY() - 1, Direction.SOUTH));
     }
+    
     private void moveRightSide(){
         setPosition(Position.of(position.getX()+1, position.getY(), Direction.EAST));
     }
+    
     private void moveLeftSide(){
         setPosition(Position.of(position.getX()-1, position.getY(), Direction.WEST));
     }
