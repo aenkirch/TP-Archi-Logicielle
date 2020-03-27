@@ -45,24 +45,24 @@ public class MarsRoverImpl implements MarsRover {
     
     private void moveForward(){
     	if(position.getDirection() == Direction.NORTH) {
-    		setPosition(Position.of(position.getX(), position.getY() + 1, position.getDirection()));
+    		setPosition(Position.of(position.getX(), spherique(position.getY() + 1), position.getDirection()));
     	}else if(position.getDirection() == Direction.EAST) {
-    		setPosition(Position.of(position.getX() + 1, position.getY(), position.getDirection()));
+    		setPosition(Position.of(spherique(position.getX() + 1), position.getY(), position.getDirection()));
     	}else if(position.getDirection() == Direction.SOUTH) {
-    		setPosition(Position.of(position.getX(), position.getY() - 1, position.getDirection()));
+    		setPosition(Position.of(position.getX(), spherique(position.getY() - 1), position.getDirection()));
     	}else if(position.getDirection() == Direction.WEST) {
-    		setPosition(Position.of(position.getX() - 1, position.getY(), position.getDirection()));
+    		setPosition(Position.of(spherique(position.getX() - 1), position.getY(), position.getDirection()));
     	}
     }
     private void moveBackward(){
         if(position.getDirection() == Direction.NORTH) {
-        	setPosition(Position.of(position.getX(), position.getY() - 1, position.getDirection()));
+        	setPosition(Position.of(position.getX(), spherique(position.getY() - 1), position.getDirection()));
         }else if(position.getDirection() == Direction.EAST) {
-        	setPosition(Position.of(position.getX() - 1, position.getY(), position.getDirection()));
+        	setPosition(Position.of(spherique(position.getX() - 1), position.getY(), position.getDirection()));
         }else if(position.getDirection() == Direction.SOUTH) {
-        	setPosition(Position.of(position.getX(), position.getY() + 1, position.getDirection()));
+        	setPosition(Position.of(position.getX(), spherique(position.getY() + 1), position.getDirection()));
         }else if(position.getDirection() == Direction.WEST) {
-        	setPosition(Position.of(position.getX() + 1, position.getY(), position.getDirection()));
+        	setPosition(Position.of(spherique(position.getX() + 1), position.getY(), position.getDirection()));
         }
     }
     
@@ -90,6 +90,15 @@ public class MarsRoverImpl implements MarsRover {
         }
     }
 
+    public int spherique(int x) {
+    	if(x > 50) {
+    		x = -50;
+    	}else if(x < -50) {
+    		x = 50;
+    	}
+    	return x;
+    }
+    
     public void setPosition(Position posi) {
         this.position = posi;
     }

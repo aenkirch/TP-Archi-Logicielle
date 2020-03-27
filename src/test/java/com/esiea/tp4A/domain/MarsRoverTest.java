@@ -47,39 +47,39 @@ class MarsRoverTest {
 	
 	@Test
 	void planette_spherique_plus_50_f_moins_50_North() {
-		MarsRover marsSphere = new MarsRoverImpl().initialize(Position.of(50, 0, Direction.NORTH));
+		MarsRover marsSphere = new MarsRoverImpl().initialize(Position.of(0, 50, Direction.NORTH));
 		Assertions.assertThat(marsSphere.move("f"))
-			.as("Mars Rover reviens en x = -50")
+			.as("Mars Rover reviens en y = -50")
 			.extracting(Position::getX, Position::getY, Position::getDirection)
-			.containsExactly(-49, 0, Direction.NORTH);
+			.containsExactly(0, -50, Direction.NORTH);
 	}
 	
 	@Test
 	void planette_spherique_moins_50_b_plus_50_North() {
-		MarsRover marsSphere = new MarsRoverImpl().initialize(Position.of(-50, 0, Direction.NORTH));
+		MarsRover marsSphere = new MarsRoverImpl().initialize(Position.of(0, -50, Direction.NORTH));
 		Assertions.assertThat(marsSphere.move("b"))
-			.as("Mars Rover reviens en x = 50")
+			.as("Mars Rover reviens en y = 50")
 			.extracting(Position::getX, Position::getY, Position::getDirection)
-			.containsExactly(50, 0, Direction.NORTH);
+			.containsExactly(0, 50, Direction.NORTH);
 	}
 	
 	
 	@Test
 	void planette_spherique_plus_50_f_50_moins_East() {
-		MarsRover marsSphere = new MarsRoverImpl().initialize(Position.of(0, 50, Direction.EAST));
+		MarsRover marsSphere = new MarsRoverImpl().initialize(Position.of(50, 0, Direction.WEST));
 		Assertions.assertThat(marsSphere.move("b"))
-			.as("Mars Rover reviens en y = -50")
+			.as("Mars Rover reviens en x = -50")
 			.extracting(Position::getX, Position::getY, Position::getDirection)
-			.containsExactly(0, -50, Direction.EAST);
+			.containsExactly(-50, 0, Direction.WEST);
 	}
 	
 	@Test
 	void planette_spherique_moins_50_b_plus_50_East() {
-		MarsRover marsSphere = new MarsRoverImpl().initialize(Position.of(0, -50, Direction.EAST));
+		MarsRover marsSphere = new MarsRoverImpl().initialize(Position.of(-50, 0, Direction.EAST));
 		Assertions.assertThat(marsSphere.move("b"))
-			.as("Mars Rover reviens en y = 50")
+			.as("Mars Rover reviens en x = 50")
 			.extracting(Position::getX, Position::getY, Position::getDirection)
-			.containsExactly(0, 50, Direction.EAST);
+			.containsExactly(50, 0, Direction.EAST);
 	}
 	
 	/*@Test
