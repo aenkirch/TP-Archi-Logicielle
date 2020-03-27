@@ -31,25 +31,18 @@ public class MarsRoverImpl implements MarsRover {
         return Position.of(position.getX(), position.getY(), position.getDirection());
     }
 
-    private void movement(char command){
-        switch(command){
-            case 'f':
-                moveForward();
-                break;
-            case 'b':
-                moveBackward();
-                break;
-            case 'r':
-                moveRightSide();
-                break;
-            case 'l':
-                moveLeftSide();
-                break;
-            default:
-                break;
-        }
+    private void movement(char command) {
+    	if(command == 'f') {
+    		moveForward();
+    	}else if(command == 'b') {
+    		moveBackward();
+    	}else if(command == 'r') {
+    		moveRightSide();
+    	}else if(command == 'l') {
+    		moveLeftSide();
+    	}
     }
-
+    
     private void moveForward(){
     	if(position.getDirection() == Direction.NORTH) {
     		setPosition(Position.of(position.getX(), position.getY() + 1, position.getDirection()));
