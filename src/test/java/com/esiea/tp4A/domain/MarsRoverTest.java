@@ -122,6 +122,30 @@ class MarsRoverTest {
             .containsExactly(0,2,Direction.NORTH);
     }
 
+    @Test
+    void unknown_command_should_be_ignored_commande1() {
+        Assertions.assertThat(marsrover.move("f f"))
+            .as("Mars Rover moving forward from origin")
+            .extracting(Position::getX, Position::getY, Position::getDirection)
+            .containsExactly(0,2,Direction.NORTH);
+    }
+
+    @Test
+    void unknown_command_should_be_ignored_commande2() {
+        Assertions.assertThat(marsrover.move("f,f"))
+            .as("Mars Rover moving forward from origin")
+            .extracting(Position::getX, Position::getY, Position::getDirection)
+            .containsExactly(0,2,Direction.NORTH);
+    }
+
+    @Test
+    void unknown_command_should_be_ignored_commande3() {
+        Assertions.assertThat(marsrover.move("ff;"))
+            .as("Mars Rover moving forward from origin")
+            .extracting(Position::getX, Position::getY, Position::getDirection)
+            .containsExactly(0,2,Direction.NORTH);
+    }
+
 	/*@Test
 	void rover_dont_move_when_bad_command() {
 		Assertions.assertThat(marsrover.move("w"))
