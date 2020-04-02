@@ -89,7 +89,23 @@ class MarsRoverTest {
             .extracting(Position::getX, Position::getY, Position::getDirection)
             .containsExactly(1,2,Direction.WEST);
     }
-	
+
+    @Test
+    void complex_moves_from_center_more_commandes() {
+        Assertions.assertThat(marsrover.move("lbblffr"))
+            .as("Mars Rover moving forward from origin")
+            .extracting(Position::getX, Position::getY, Position::getDirection)
+            .containsExactly(2,-2,Direction.WEST);
+    }
+
+    @Test
+    void complex_moves_from_different_origin() {
+        Assertions.assertThat(marsrover.move("ff"))
+            .as("Mars Rover moving forward from origin")
+            .extracting(Position::getX, Position::getY, Position::getDirection)
+            .containsExactly(0,2,Direction.NORTH);
+    }
+
 	/*@Test
 	void rover_dont_move_when_bad_command() {
 		Assertions.assertThat(marsrover.move("w"))
