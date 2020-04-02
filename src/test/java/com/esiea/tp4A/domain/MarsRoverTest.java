@@ -81,6 +81,14 @@ class MarsRoverTest {
 			.extracting(Position::getX, Position::getY, Position::getDirection)
 			.containsExactly(50, 0, Direction.EAST);
 	}
+
+    @Test
+    void complex_moves_from_center() {
+        Assertions.assertThat(marsrover.move("fflb"))
+            .as("Mars Rover moving forward from origin")
+            .extracting(Position::getX, Position::getY, Position::getDirection)
+            .containsExactly(1,2,Direction.WEST);
+    }
 	
 	/*@Test
 	void rover_dont_move_when_bad_command() {
