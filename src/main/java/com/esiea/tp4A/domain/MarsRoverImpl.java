@@ -123,9 +123,29 @@ public class MarsRoverImpl implements MarsRover {
         Boolean access = null;
         Iterator<Position> obstacle = rovermap.obstaclePositions().iterator();
         
-        position_simulation(currentX,futurY,c);
-
-        
+       
+       if(c=='f'){
+            if (getDirection().toString() == "NORTH") {
+                futurY = futurY + 1;
+            } else if (getDirection().toString() == "EAST") {
+                currentX = currentX + 1;
+            } else if (getDirection().toString() == "SOUTH") {
+                futurY = futurY - 1;
+            } else if (getDirection().toString() == "WEST") {
+                currentX = currentX - 1;
+            }
+        }
+            else if(c=='b'){
+                if (getDirection().toString() == "NORTH") {
+                    futurY = futurY - 1;
+                } else if (getDirection().toString() == "EAST") {
+                    currentX = currentX - 1;
+                } else if (getDirection().toString() == "SOUTH") {
+                    futurY = futurY + 1;
+                } else if (getDirection().toString() == "WEST") {
+                    currentX = currentX + 1;
+                }
+        }
         while (obstacle.hasNext()) {
             Position lp = obstacle.next();
             obstacleX = lp.getX();
@@ -145,30 +165,7 @@ public class MarsRoverImpl implements MarsRover {
         }
     }
 
-    public void position_simulation(int X, int Y,char c){
-        if(c=='f'){
-        if (getDirection().toString() == "NORTH") {
-            Y = Y + 1;
-        } else if (getDirection().toString() == "EAST") {
-            X = X + 1;
-        } else if (getDirection().toString() == "SOUTH") {
-            Y = Y - 1;
-        } else if (getDirection().toString() == "WEST") {
-            X = X - 1;
-        }
-    }
-    else if(c=='b'){
-        if (getDirection().toString() == "NORTH") {
-            Y = Y - 1;
-        } else if (getDirection().toString() == "EAST") {
-            X = X - 1;
-        } else if (getDirection().toString() == "SOUTH") {
-            Y = Y + 1;
-        } else if (getDirection().toString() == "WEST") {
-            X = X + 1;
-        }
-    }
-    }
+  
 
     public void setPosition(Position posi) {
         this.position = posi;

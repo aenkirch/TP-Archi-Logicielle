@@ -144,7 +144,7 @@ class MarsRoverTest {
     }
     @Test
     void obstacle_detection(){       
-        marsrover.initialize(Position.of(0,0, Direction.NORTH));
+        marsrover.initialize(Position.of(0,1, Direction.NORTH));
         marsrover.updateMap(planetmap);
         planetmap.obstaclePositions();
         Assertions.assertThat(marsrover.move("f"))
