@@ -4,6 +4,7 @@ public interface Position {
 	int getX();
     int getY();
     Direction getDirection();
+
     
     static Position of(int x, int y, Direction direction) {
         return new FixedPosition(x, y, direction);
