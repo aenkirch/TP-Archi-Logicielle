@@ -6,7 +6,7 @@ public interface MarsRover {
         return this;
     }
 
-    default MarsRover updateMap(PlanetMap map) {
+    default MarsRover updateMap(PlanetMapImpl map) {
         return this;
     }
 

@@ -6,11 +6,8 @@ import org.junit.jupiter.api.Test;
 
 class MarsRoverTest {
 
-
-
-	
 	final MarsRover marsrover = new MarsRoverImpl().initialize(Position.of(0, 0, Direction.NORTH));
-	
+	final PlanetMapImpl planetmap = new PlanetMapImpl();
 
 	@Test
 	void rover_moves_forward_when_receving_f_command() {
@@ -18,7 +15,7 @@ class MarsRoverTest {
             .as("Mars Rover moving forward from origin")
             .extracting(Position::getX, Position::getY, Position::getDirection)
             .containsExactly(0,1,Direction.NORTH);
-	}
+    }
 
 	@Test
 	void rover_move_backward_when_receving_b_command() {
@@ -145,6 +142,19 @@ class MarsRoverTest {
             .extracting(Position::getX, Position::getY, Position::getDirection)
             .containsExactly(0,2,Direction.NORTH);
     }
+    @Test
+    void obstacle_detection(){       
+        marsrover.initialize(Position.of(0,0, Direction.NORTH));
+        marsrover.updateMap(planetmap);
+        planetmap.obstaclePositions();
+        Assertions.assertThat(marsrover.move("f"))
+        .as("Mars Rover detect an obstacle")
+        .extracting(Position::getX, Position::getY, Position::getDirection)
+        .containsExactly(0,1,Direction.NORTH);
+      
+    }
+    
+
 
 	/*@Test
 	void rover_dont_move_when_bad_command() {
