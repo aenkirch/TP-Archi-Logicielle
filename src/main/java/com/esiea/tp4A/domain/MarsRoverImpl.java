@@ -8,7 +8,7 @@ public class MarsRoverImpl implements MarsRover {
 
     private Position position;
     private PlanetMapImpl rovermap = null;
-    private int laser_range = 0 ;
+    private int laser_range = 0;
 
     public MarsRover initialize(Position position) {
         setPosition(position);
@@ -21,7 +21,7 @@ public class MarsRoverImpl implements MarsRover {
     }
 
     public MarsRover configureLaserRange(int range) {
-        this.laser_range = range ;
+        this.laser_range = range;
         return this;
     }
 
@@ -40,11 +40,11 @@ public class MarsRoverImpl implements MarsRover {
                     obstacle_test(ci.current());
                 } else if (ci.current() == 'l' || ci.current() == 'r') {
                     movement(ci.current());
-                }else if (ci.current()== 's'){
+                } else if (ci.current() == 's') {
                     laser_shot(laser_range);
                 }
                 ci.next();
-            }  // rovermap=null;
+            }
         }
         return Position.of(position.getX(), position.getY(), position.getDirection());
     }
@@ -119,16 +119,14 @@ public class MarsRoverImpl implements MarsRover {
     }
 
     public void obstacle_test(char c) {
-
         int currentX = getPosition().getX();
         int futurY = getPosition().getY();
         int obstacleX;
         int obstacleY;
         Boolean access = null;
         Iterator<Position> obstacle = rovermap.obstaclePositions().iterator();
-        
-       
-       if(c=='f'){
+
+        if (c == 'f') {
             if (getDirection().toString() == "NORTH") {
                 futurY = futurY + 1;
             } else if (getDirection().toString() == "EAST") {
@@ -138,17 +136,16 @@ public class MarsRoverImpl implements MarsRover {
             } else if (getDirection().toString() == "WEST") {
                 currentX = currentX - 1;
             }
-        }
-            else if(c=='b'){
-                if (getDirection().toString() == "NORTH") {
-                    futurY = futurY - 1;
-                } else if (getDirection().toString() == "EAST") {
-                    currentX = currentX - 1;
-                } else if (getDirection().toString() == "SOUTH") {
-                    futurY = futurY + 1;
-                } else if (getDirection().toString() == "WEST") {
-                    currentX = currentX + 1;
-                }
+        } else if (c == 'b') {
+            if (getDirection().toString() == "NORTH") {
+                futurY = futurY - 1;
+            } else if (getDirection().toString() == "EAST") {
+                currentX = currentX - 1;
+            } else if (getDirection().toString() == "SOUTH") {
+                futurY = futurY + 1;
+            } else if (getDirection().toString() == "WEST") {
+                currentX = currentX + 1;
+            }
         }
         while (obstacle.hasNext()) {
             Position lp = obstacle.next();
@@ -161,13 +158,12 @@ public class MarsRoverImpl implements MarsRover {
                 access = true;
             }
         }
-
         if (access == true) {
             movement(c);
         }
     }
 
-    public void laser_shot(int rang){
+    public void laser_shot(int rang) {
         int currentX = getPosition().getX();
         int futurY = getPosition().getY();
         String direction = getDirection().toString();
@@ -175,109 +171,70 @@ public class MarsRoverImpl implements MarsRover {
         int obstacleY;
         Iterator<Position> obstacle = rovermap.obstaclePositions().iterator();
 
-        if (rang != 0 ){
-        if(direction == "NORTH"){
-         obstacleX=currentX;
-        
-
-         for (int i =1; i <= rang ; i++){
-            obstacleY=futurY+i;
-
-            while (obstacle.hasNext()) {
-                Position lp = obstacle.next();
-           
-                if( lp.getX() == obstacleX && lp.getY() == obstacleY )
-               {     
-                rovermap.obstaclePositions().remove(lp);
-                obstacle = rovermap.obstaclePositions().iterator();
-                i=rang;
-         
-                break;
-               }
-               
-         }
-         obstacle = rovermap.obstaclePositions().iterator();
-        
-         }
-        
-
-        } else if(direction == "SOUTH"){
-            obstacleX=currentX;
-           
-   
-            for (int i =1; i <= rang ; i++){
-               obstacleY=futurY-i;
-   
-               while (obstacle.hasNext()) {
-                   Position lp = obstacle.next();
-              
-                   if( lp.getX() == obstacleX && lp.getY() == obstacleY )
-                  {     
-                   rovermap.obstaclePositions().remove(lp);
-                   obstacle = rovermap.obstaclePositions().iterator();
-                   i=rang;
-                   break;
-                  }
-                  
-            }
-            obstacle = rovermap.obstaclePositions().iterator();
-           
-            }
-           
-   
-           }
-        else if (direction == "EAST"){
-
-            obstacleY=futurY;
-        
-
-            for (int i =1; i <= rang ; i++){
-               obstacleX=currentX+i;
-   
-               while (obstacle.hasNext()) {
-                   Position lp = obstacle.next();
-              
-                   if( lp.getX() == obstacleX && lp.getY() == obstacleY )
-                  {     
-                   rovermap.obstaclePositions().remove(lp);
-                   obstacle = rovermap.obstaclePositions().iterator();
-                   i=rang;
-                   break;
-                  }
-                  
-            }
-            obstacle = rovermap.obstaclePositions().iterator();
-           
-            }
-        }    else if (direction == "WEST"){
-
-            obstacleY=futurY;
-        
-
-            for (int i =1; i <= rang ; i++){
-               obstacleX=currentX-i;
-   
-               while (obstacle.hasNext()) {
-                   Position lp = obstacle.next();
-              
-                   if( lp.getX() == obstacleX && lp.getY() == obstacleY )
-                  {     
-                   rovermap.obstaclePositions().remove(lp);
-                   obstacle = rovermap.obstaclePositions().iterator();
-                   i=rang;
-                   break;
-                  }
-                  
-            }
-            obstacle = rovermap.obstaclePositions().iterator();
-           
+        if (rang != 0) {
+            if (direction == "NORTH") {
+                obstacleX = currentX;
+                for (int i = 1; i <= rang; i++) {
+                    obstacleY = futurY + i;
+                    while (obstacle.hasNext()) {
+                        Position lp = obstacle.next();
+                        if (lp.getX() == obstacleX && lp.getY() == obstacleY) {
+                            rovermap.obstaclePositions().remove(lp);
+                            obstacle = rovermap.obstaclePositions().iterator();
+                            i = rang;
+                            break;
+                        }
+                    }
+                    obstacle = rovermap.obstaclePositions().iterator();
+                }
+            } else if (direction == "SOUTH") {
+                obstacleX = currentX;
+                for (int i = 1; i <= rang; i++) {
+                    obstacleY = futurY - i;
+                    while (obstacle.hasNext()) {
+                        Position lp = obstacle.next();
+                        if (lp.getX() == obstacleX && lp.getY() == obstacleY) {
+                            rovermap.obstaclePositions().remove(lp);
+                            obstacle = rovermap.obstaclePositions().iterator();
+                            i = rang;
+                            break;
+                        }
+                    }
+                    obstacle = rovermap.obstaclePositions().iterator();
+                }
+            } else if (direction == "EAST") {
+                obstacleY = futurY;
+                for (int i = 1; i <= rang; i++) {
+                    obstacleX = currentX + i;
+                    while (obstacle.hasNext()) {
+                        Position lp = obstacle.next();
+                        if (lp.getX() == obstacleX && lp.getY() == obstacleY) {
+                            rovermap.obstaclePositions().remove(lp);
+                            obstacle = rovermap.obstaclePositions().iterator();
+                            i = rang;
+                            break;
+                        }
+                    }
+                    obstacle = rovermap.obstaclePositions().iterator();
+                }
+            } else if (direction == "WEST") {
+                obstacleY = futurY;
+                for (int i = 1; i <= rang; i++) {
+                    obstacleX = currentX - i;
+                    while (obstacle.hasNext()) {
+                        Position lp = obstacle.next();
+                        if (lp.getX() == obstacleX && lp.getY() == obstacleY) {
+                            rovermap.obstaclePositions().remove(lp);
+                            obstacle = rovermap.obstaclePositions().iterator();
+                            i = rang;
+                            break;
+                        }
+                    }
+                    obstacle = rovermap.obstaclePositions().iterator();
+                }
             }
         }
-        }
-
-
     }
-  
 
     public void setPosition(Position posi) {
         this.position = posi;

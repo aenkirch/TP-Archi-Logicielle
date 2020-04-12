@@ -20,5 +20,4 @@ public class PositionImpl implements Position {
 		return null;
 	}
 
-
 }
