@@ -8,6 +8,7 @@ public class MarsRoverImpl implements MarsRover {
 
     private Position position;
     private PlanetMapImpl rovermap = null;
+    private int laser_range = 0 ;
 
     public MarsRover initialize(Position position) {
         setPosition(position);
@@ -20,6 +21,7 @@ public class MarsRoverImpl implements MarsRover {
     }
 
     public MarsRover configureLaserRange(int range) {
+        this.laser_range = range ;
         return this;
     }
 
@@ -38,6 +40,8 @@ public class MarsRoverImpl implements MarsRover {
                     obstacle_test(ci.current());
                 } else if (ci.current() == 'l' || ci.current() == 'r') {
                     movement(ci.current());
+                }else if (ci.current()== 's'){
+                    laser_shot(laser_range);
                 }
                 ci.next();
             }  // rovermap=null;
@@ -163,6 +167,41 @@ public class MarsRoverImpl implements MarsRover {
         }
     }
 
+    public void laser_shot(int rang){
+        int currentX = getPosition().getX();
+        int futurY = getPosition().getY();
+        String direction = getDirection().toString();
+        int obstacleX;
+        int obstacleY;
+        Iterator<Position> obstacle = rovermap.obstaclePositions().iterator();
+
+        if (rang != 0 ){
+        if(direction == "NORTH"){
+         obstacleX=currentX;
+        
+
+         for (int i =1; i <= rang ; i++){
+            obstacleY=futurY+i;
+
+            while (obstacle.hasNext()) {
+                Position lp = obstacle.next();
+                if( lp.getX() == obstacleX && lp.getY() == obstacleY )
+               {     
+                rovermap.obstaclePositions().remove(lp);
+         //  System.out.println(rovermap.obstaclePositions().remove(lp));
+           // System.out.print(rovermap.obstaclePositions());
+                break;
+               }
+         }
+        
+         }
+        
+
+        }
+        }
+
+
+    }
   
 
     public void setPosition(Position posi) {
