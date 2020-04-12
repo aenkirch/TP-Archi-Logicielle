@@ -146,7 +146,7 @@ class MarsRoverTest {
     void obstacle_front_detection(){       
         marsrover.initialize(Position.of(0,0, Direction.NORTH));
         marsrover.updateMap(planetmap);
-        planetmap.obstaclePositions();
+        planetmap.ajout_obstacle();
         Assertions.assertThat(marsrover.move("f"))
         .as("Mars Rover detect an obstacle in front of him and doesn't move")
         .extracting(Position::getX, Position::getY, Position::getDirection)
@@ -157,7 +157,7 @@ class MarsRoverTest {
     void obstacle_back_detection(){       
         marsrover.initialize(Position.of(1,2, Direction.EAST));
         marsrover.updateMap(planetmap);
-        planetmap.obstaclePositions();
+        planetmap.ajout_obstacle();
         Assertions.assertThat(marsrover.move("b"))
         .as("Mars Rover detect an obstacle in back of him and doesn't move")
         .extracting(Position::getX, Position::getY, Position::getDirection)
@@ -167,12 +167,29 @@ class MarsRoverTest {
     void rover_receive_list_command_and_detect_obstacle(){       
         marsrover.initialize(Position.of(10,3, Direction.NORTH));
         marsrover.updateMap(planetmap);
-        planetmap.obstaclePositions();
+        planetmap.ajout_obstacle();
         Assertions.assertThat(marsrover.move("flfrfrflfrfrf"))
         .as("Mars rover cannot access to this position(X=10,Y=4) du to an obstacle")
         .extracting(Position::getX, Position::getY, Position::getDirection)
         .containsExactly(10,5,Direction.SOUTH);
     }
+
+    @Test
+    void mars_rover_laser(){       
+        marsrover.initialize(Position.of(0,0, Direction.NORTH));
+        marsrover.updateMap(planetmap);
+        planetmap.ajout_obstacle();
+        marsrover.configureLaserRange(1);
+
+        Assertions.assertThat(marsrover.move("sf"))
+        .as("Mars Rover detect an obstacle in front of him and doesn't move")
+        .extracting(Position::getX, Position::getY, Position::getDirection)
+        .containsExactly(0,1,Direction.NORTH);
+    }
+
+
+
+    
 	/*@Test
 	void rover_dont_move_when_bad_command() {
 		Assertions.assertThat(marsrover.move("w"))
