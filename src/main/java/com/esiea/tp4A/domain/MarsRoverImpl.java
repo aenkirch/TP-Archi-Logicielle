@@ -150,8 +150,6 @@ public class MarsRoverImpl implements MarsRover {
             Position lp = obstacle.next();
             obstacleX = lp.getX();
             obstacleY = lp.getY();
-            System.out.println(obstacleX);
-            System.out.println(obstacleY);
             if (currentX == obstacleX && futurY == obstacleY) {
                 access = false;
                 break;
