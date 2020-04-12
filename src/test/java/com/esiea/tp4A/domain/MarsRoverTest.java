@@ -181,7 +181,7 @@ class MarsRoverTest {
         planetmap.ajout_obstacle();
         marsrover.configureLaserRange(1);
 
-        Assertions.assertThat(marsrover.move("sf"))
+        Assertions.assertThat(marsrover.move("sff"))
         .as("Mars Rover detect an obstacle in front of him and doesn't move")
         .extracting(Position::getX, Position::getY, Position::getDirection)
         .containsExactly(0,1,Direction.NORTH);
@@ -195,11 +195,25 @@ class MarsRoverTest {
         planetmap.ajout_obstacle();
         marsrover.configureLaserRange(2);
 
-        Assertions.assertThat(marsrover.move("sf"))
+        Assertions.assertThat(marsrover.move("sff"))
         .as("Mars Rover detect an obstacle in front of him and doesn't move")
         .extracting(Position::getX, Position::getY, Position::getDirection)
-        .containsExactly(0,1,Direction.NORTH);
+        .containsExactly(0,2,Direction.NORTH);
     }
+    @Test
+    void mars_rover_laser_long_shot(){       
+        marsrover.initialize(Position.of(10,0, Direction.NORTH));
+        marsrover.updateMap(planetmap);
+        planetmap.ajout_obstacle();
+        marsrover.configureLaserRange(4);
+
+        Assertions.assertThat(marsrover.move("sffff"))
+        .as("Mars Rover detect an obstacle in front of him and doesn't move")
+        .extracting(Position::getX, Position::getY, Position::getDirection)
+        .containsExactly(10,4,Direction.NORTH);
+    }
+
+
 
 
     
