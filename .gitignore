@@ -1,11 +1,13 @@
 target/
 
 # Eclipse
+bin/
 .classpath
 .project
 .settings/
 
 # Intellij
+bin/
 .idea/
 *.iml
 *.iws
