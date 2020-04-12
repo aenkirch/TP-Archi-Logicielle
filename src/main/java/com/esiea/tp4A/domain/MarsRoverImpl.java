@@ -185,17 +185,17 @@ public class MarsRoverImpl implements MarsRover {
 
             while (obstacle.hasNext()) {
                 Position lp = obstacle.next();
-                System.out.println(lp.getX());
-                System.out.println(lp.getY());
+           
                 if( lp.getX() == obstacleX && lp.getY() == obstacleY )
                {     
                 rovermap.obstaclePositions().remove(lp);
-                obstacle= rovermap.obstaclePositions().iterator();
-         //  System.out.println(rovermap.obstaclePositions().remove(lp));
-           // System.out.print(rovermap.obstaclePositions());
+                obstacle = rovermap.obstaclePositions().iterator();
+         
                 break;
                }
+               
          }
+         obstacle = rovermap.obstaclePositions().iterator();
         
          }
         
