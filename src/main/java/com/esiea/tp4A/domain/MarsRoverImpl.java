@@ -15,6 +15,10 @@ public class MarsRoverImpl implements MarsRover {
         return this;
     }
 
+    public Position getPos() {
+        return this.position;
+    }
+
     public MarsRover updateMap(PlanetMapImpl map) {
         this.rovermap = map;
         return this;
