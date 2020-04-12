@@ -11,20 +11,17 @@ public class PlanetMapImpl implements PlanetMap {
     final Position obstacle4 = Position.of(30, 20, Direction.NORTH);
     Set<Position> obstacleSet = new HashSet<Position>();
 
-
     @Override
     public Set<Position> obstaclePositions() {
         // TODO Auto-generated method stub
-          return this.obstacleSet;
+        return this.obstacleSet;
     }
 
-    public void ajout_obstacle(){
-    this.obstacleSet.add(obstacle1);
-    this.obstacleSet.add(obstacle2);
-    this.obstacleSet.add(obstacle3);
-    this.obstacleSet.add(obstacle4);
+    public void ajout_obstacle() {
+        this.obstacleSet.add(obstacle1);
+        this.obstacleSet.add(obstacle2);
+        this.obstacleSet.add(obstacle3);
+        this.obstacleSet.add(obstacle4);
     }
-     
- 
 
 }
