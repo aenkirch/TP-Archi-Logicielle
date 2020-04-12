@@ -173,6 +173,17 @@ class MarsRoverTest {
         .extracting(Position::getX, Position::getY, Position::getDirection)
         .containsExactly(10,5,Direction.SOUTH);
     }
+    @Test
+    void mars_rover_obstacle_exemple(){       
+        marsrover.initialize(Position.of(0,0, Direction.NORTH));
+        marsrover.updateMap(planetmap);
+        planetmap.ajout_obstacle();
+        Assertions.assertThat(marsrover.move("fflb"))
+        .as("Exemple de l'énoncé pour la detection d'obstacle")
+        .extracting(Position::getX, Position::getY, Position::getDirection)
+        .containsExactly(1,0,Direction.WEST);
+    }
+
 
     @Test
     void mars_rover_laser(){       
@@ -181,8 +192,8 @@ class MarsRoverTest {
         planetmap.ajout_obstacle();
         marsrover.configureLaserRange(1);
 
-        Assertions.assertThat(marsrover.move("sff"))
-        .as("Mars Rover detect an obstacle in front of him and doesn't move")
+        Assertions.assertThat(marsrover.move("sf"))
+        .as("Mars Rover shot an obstacle in front of him and now can go forward")
         .extracting(Position::getX, Position::getY, Position::getDirection)
         .containsExactly(0,1,Direction.NORTH);
     }
@@ -195,11 +206,12 @@ class MarsRoverTest {
         planetmap.ajout_obstacle();
         marsrover.configureLaserRange(2);
 
-        Assertions.assertThat(marsrover.move("sff"))
-        .as("Mars Rover detect an obstacle in front of him and doesn't move")
+        Assertions.assertThat(marsrover.move("ssff"))
+        .as("Mars shot in front of him for a distance of 2, he can go forwad 2 steps")
         .extracting(Position::getX, Position::getY, Position::getDirection)
         .containsExactly(0,2,Direction.NORTH);
     }
+
     @Test
     void mars_rover_laser_long_shot(){       
         marsrover.initialize(Position.of(10,0, Direction.NORTH));
@@ -208,10 +220,39 @@ class MarsRoverTest {
         marsrover.configureLaserRange(4);
 
         Assertions.assertThat(marsrover.move("sffff"))
-        .as("Mars Rover detect an obstacle in front of him and doesn't move")
+        .as("Mars Rover long shot obstacles and go to his position to test")
         .extracting(Position::getX, Position::getY, Position::getDirection)
         .containsExactly(10,4,Direction.NORTH);
     }
+
+    @Test
+    void mars_rover_laser_shot_for_east(){      
+        marsrover.initialize(Position.of(29,20, Direction.EAST));
+        marsrover.updateMap(planetmap);
+        planetmap.ajout_obstacle();
+        marsrover.configureLaserRange(4);
+
+        Assertions.assertThat(marsrover.move("sf"))
+        .as("Mars Rover shots obstacles when direction = East")
+        .extracting(Position::getX, Position::getY, Position::getDirection)
+        .containsExactly(30,20,Direction.EAST);
+    }
+    @Test
+    void mars_rover_laser_shot_for_south(){      
+        marsrover.initialize(Position.of(0,3, Direction.SOUTH));
+        marsrover.updateMap(planetmap);
+        planetmap.ajout_obstacle();
+        marsrover.configureLaserRange(4);
+
+        Assertions.assertThat(marsrover.move("sf"))
+        .as("Mars Rover shots obstacles when direction = East")
+        .extracting(Position::getX, Position::getY, Position::getDirection)
+        .containsExactly(0,2,Direction.SOUTH);
+    }
+ 
+
+  
+  
 
 
 

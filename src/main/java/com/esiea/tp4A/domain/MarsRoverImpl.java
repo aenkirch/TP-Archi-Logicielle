@@ -190,6 +190,7 @@ public class MarsRoverImpl implements MarsRover {
                {     
                 rovermap.obstaclePositions().remove(lp);
                 obstacle = rovermap.obstaclePositions().iterator();
+                i=rang;
          
                 break;
                }
@@ -200,6 +201,77 @@ public class MarsRoverImpl implements MarsRover {
          }
         
 
+        } else if(direction == "SOUTH"){
+            obstacleX=currentX;
+           
+   
+            for (int i =1; i <= rang ; i++){
+               obstacleY=futurY-i;
+   
+               while (obstacle.hasNext()) {
+                   Position lp = obstacle.next();
+              
+                   if( lp.getX() == obstacleX && lp.getY() == obstacleY )
+                  {     
+                   rovermap.obstaclePositions().remove(lp);
+                   obstacle = rovermap.obstaclePositions().iterator();
+                   i=rang;
+                   break;
+                  }
+                  
+            }
+            obstacle = rovermap.obstaclePositions().iterator();
+           
+            }
+           
+   
+           }
+        else if (direction == "EAST"){
+
+            obstacleY=futurY;
+        
+
+            for (int i =1; i <= rang ; i++){
+               obstacleX=currentX+i;
+   
+               while (obstacle.hasNext()) {
+                   Position lp = obstacle.next();
+              
+                   if( lp.getX() == obstacleX && lp.getY() == obstacleY )
+                  {     
+                   rovermap.obstaclePositions().remove(lp);
+                   obstacle = rovermap.obstaclePositions().iterator();
+                   i=rang;
+                   break;
+                  }
+                  
+            }
+            obstacle = rovermap.obstaclePositions().iterator();
+           
+            }
+        }    else if (direction == "WEST"){
+
+            obstacleY=futurY;
+        
+
+            for (int i =1; i <= rang ; i++){
+               obstacleX=currentX-i;
+   
+               while (obstacle.hasNext()) {
+                   Position lp = obstacle.next();
+              
+                   if( lp.getX() == obstacleX && lp.getY() == obstacleY )
+                  {     
+                   rovermap.obstaclePositions().remove(lp);
+                   obstacle = rovermap.obstaclePositions().iterator();
+                   i=rang;
+                   break;
+                  }
+                  
+            }
+            obstacle = rovermap.obstaclePositions().iterator();
+           
+            }
         }
         }
 
