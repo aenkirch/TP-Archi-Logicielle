@@ -9,19 +9,22 @@ public class PlanetMapImpl implements PlanetMap {
     final Position obstacle2 = Position.of(0, 2, Direction.NORTH);
     final Position obstacle3 = Position.of(10, 4, Direction.NORTH);
     final Position obstacle4 = Position.of(30, 20, Direction.NORTH);
-    Set<Position> obstacleSet = new HashSet<Position>();
+    final Set<Position> obstacleSet = new HashSet<Position>();
 
     @Override
     public Set<Position> obstaclePositions() {
-        // TODO Auto-generated method stub
         return this.obstacleSet;
     }
-
     public void ajout_obstacle() {
         this.obstacleSet.add(obstacle1);
         this.obstacleSet.add(obstacle2);
         this.obstacleSet.add(obstacle3);
         this.obstacleSet.add(obstacle4);
     }
+
+    public void ajout_obstacle_dynamique(Position o){
+        this.obstacleSet.add(o);
+    }
+
 
 }
