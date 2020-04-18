@@ -126,6 +126,39 @@ class MarsRoverTest {
     }
 
     @Test
+    void move_spherical_map_command_b() {
+        MarsRover marsSphere = new MarsRoverImpl().initialize(Position.of(-50, -49, Direction.EAST));
+        Assertions.assertThat(marsSphere.move("b")).as("Mars Rover reviens en x = +50 direct EAST")
+            .extracting(Position::getX, Position::getY, Position::getDirection)
+            .containsExactly(50, -49, Direction.EAST);
+    }
+
+    @Test
+    void move_spherical_map_command_bb() {
+        MarsRover marsSphere = new MarsRoverImpl().initialize(Position.of(-50, 34, Direction.WEST));
+        Assertions.assertThat(marsSphere.move("bb")).as("Mars Rover reviens en x = +50 direct EAST")
+            .extracting(Position::getX, Position::getY, Position::getDirection)
+            .containsExactly(-48, 34, Direction.WEST);
+    }
+
+    @Test
+    void move_spherical_map_command_fff() {
+        MarsRover marsSphere = new MarsRoverImpl().initialize(Position.of(32, 49, Direction.SOUTH));
+        Assertions.assertThat(marsSphere.move("fff")).as("Mars Rover reviens en x = +50 direct EAST")
+            .extracting(Position::getX, Position::getY, Position::getDirection)
+            .containsExactly(32, 46, Direction.SOUTH);
+    }
+
+    @Test
+    void move_spherical_map_command_rff() {
+        MarsRover marsSphere = new MarsRoverImpl().initialize(Position.of(-27, -50, Direction.NORTH));
+        Assertions.assertThat(marsSphere.move("rff")).as("Mars Rover reviens en x = +50 direct EAST")
+            .extracting(Position::getX, Position::getY, Position::getDirection)
+            .containsExactly(-25, -50, Direction.EAST);
+    }
+
+
+    @Test
     void obstacle_front_detection() {
         marsrover.initialize(Position.of(0, 0, Direction.NORTH));
         marsrover.updateMap(planetmap);
