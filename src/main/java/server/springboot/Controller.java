@@ -1,23 +1,54 @@
 package server.springboot;
 
 import com.esiea.tp4A.domain.*;
+import com.sun.net.httpserver.HttpServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.util.*;
+
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 
 @SpringBootApplication
 @RestController
 public class Controller {
 
-    public void main(String[] args){
+
+    @RequestMapping("/")
+    public @ResponseBody String greeting() {
+        return "Hello, World";
+    }
+
+
+    @RequestMapping(value = "/api/player/{pn}", method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody String createPlayer(@PathVariable("pn") String name) {
+        return "test ==> " + name;
+    }
+
+
+
+    /*public void main(String[] args) throws IOException {
         SpringApplication.run(Controller.class, args);
+        HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
+        server.setExecutor(null); // creates a default executor
+        server.start();
+        this.CreatePlayer("azerty");
     }
 
     private final Map<String, MarsRover> playerName = new HashMap<>();
+
+    @PostMapping("/api/test/{test}")
+    private String CreatePlayer(@PathVariable("test") String t){
+        return t;
+    }
+
 
     @PostMapping(path = "/api/player/{playerName}", produces = "application/json")
     private ResponseEntity<?>  CreatePlayer(@PathVariable("playerName") String pn){
@@ -76,6 +107,6 @@ public class Controller {
         playerName.put(pn, mr);
 
         return ResponseEntity.status(201).body("Joueur créé");
-    }
+    }*/
 
 }
