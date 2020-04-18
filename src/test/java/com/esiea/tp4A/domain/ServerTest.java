@@ -15,24 +15,18 @@ import server.springboot.Controller;
 
 import java.net.URISyntaxException;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Controller.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ServerTest {
 
     @Autowired
-    RestTemplateBuilder restTemplateBuilder;
-
-    private TestRestTemplate template;
+    private Controller controller;
 
     @Test
-    public void PlayerRegistration1() throws URISyntaxException {
-        ResponseEntity<String> r = template.exchange("localhost:8080/api/player/player1", HttpMethod.POST, null, String.class);
-        Assertions.assertEquals(201, r.getStatusCodeValue());
-    }
-    @Test
-    public void PlayerRegistration2() throws URISyntaxException {
-        ResponseEntity<String> r = template.exchange("localhost:8080/api/player/player1", HttpMethod.POST, null, String.class);
-        Assertions.assertEquals(409, r.getStatusCodeValue());
+    public void contexLoads() throws Exception {
+        assertThat(controller).isNotNull();
     }
 
 }
