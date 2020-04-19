@@ -13,10 +13,10 @@ import java.util.*;
 @RestController
 public class Controller {
 
-    final Set<Global> listGlobal = new HashSet<Global>();
-    final Set<Players> list = new HashSet<Players>();
-    final Set<LocalMap> listLocalMap = new HashSet<>();
-    final int laser = 3;
+    private final Set<Global> listGlobal = new HashSet<Global>();
+    private final Set<Players> list = new HashSet<Players>();
+    private final Set<LocalMap> listLocalMap = new HashSet<>();
+    private final int laser = 3;
 
 
     @PostMapping("/player/{playername}")

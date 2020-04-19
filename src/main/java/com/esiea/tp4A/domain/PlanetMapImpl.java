@@ -5,11 +5,11 @@ import java.util.Set;
 
 public class PlanetMapImpl implements PlanetMap {
 
-    final Position obstacle1 = Position.of(0, 1, Direction.NORTH);
-    final Position obstacle2 = Position.of(0, 2, Direction.NORTH);
-    final Position obstacle3 = Position.of(10, 4, Direction.NORTH);
-    final Position obstacle4 = Position.of(30, 20, Direction.NORTH);
-    final Set<Position> obstacleSet = new HashSet<Position>();
+    private final Position obstacle1 = Position.of(0, 1, Direction.NORTH);
+    private final Position obstacle2 = Position.of(0, 2, Direction.NORTH);
+    private final Position obstacle3 = Position.of(10, 4, Direction.NORTH);
+    private final Position obstacle4 = Position.of(30, 20, Direction.NORTH);
+    private final Set<Position> obstacleSet = new HashSet<Position>();
 
     @Override
     public Set<Position> obstaclePositions() {
