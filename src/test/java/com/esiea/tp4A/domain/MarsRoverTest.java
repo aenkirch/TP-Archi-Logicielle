@@ -40,14 +40,14 @@ class MarsRoverTest {
     @Test
     void planette_spherique_plus_50_f_moins_50_North() {
         marsrover.initialize(Position.of(0, 50, Direction.NORTH));
-        Assertions.assertThat(marsrover.move("f")).as("Mars Rover reviens en y = -50")
+        Assertions.assertThat(marsrover.move("f")).as("Mars Rover reviens en y = -49")
                 .extracting(Position::getX, Position::getY, Position::getDirection)
-                .containsExactly(0, -50, Direction.NORTH);
+                .containsExactly(0, -49, Direction.NORTH);
     }
 
     @Test
     void planette_spherique_moins_50_b_plus_50_North() {
-        marsrover.initialize(Position.of(0, -50, Direction.NORTH));
+        marsrover.initialize(Position.of(0, -49, Direction.NORTH));
         Assertions.assertThat(marsrover.move("b")).as("Mars Rover reviens en y = 50")
                 .extracting(Position::getX, Position::getY, Position::getDirection)
                 .containsExactly(0, 50, Direction.NORTH);
@@ -58,14 +58,14 @@ class MarsRoverTest {
     @Test
     void planette_spherique_plus_50_f_50_moins_East() {
         marsrover.initialize(Position.of(50, 0, Direction.WEST));
-        Assertions.assertThat(marsrover.move("b")).as("Mars Rover reviens en x = -50")
+        Assertions.assertThat(marsrover.move("b")).as("Mars Rover reviens en x = -49")
                 .extracting(Position::getX, Position::getY, Position::getDirection)
-                .containsExactly(-50, 0, Direction.WEST);
+                .containsExactly(-49, 0, Direction.WEST);
     }
 
     @Test
     void planette_spherique_moins_50_b_plus_50_East() {
-        marsrover.initialize(Position.of(-50, 0, Direction.EAST));
+        marsrover.initialize(Position.of(-49, 0, Direction.EAST));
         Assertions.assertThat(marsrover.move("b")).as("Mars Rover reviens en x = 50")
                 .extracting(Position::getX, Position::getY, Position::getDirection)
                 .containsExactly(50, 0, Direction.EAST);
@@ -74,7 +74,7 @@ class MarsRoverTest {
 
     @Test
     void move_spherical_map_command_b() {
-        marsrover.initialize(Position.of(-50, -49, Direction.EAST));
+        marsrover.initialize(Position.of(-49, -49, Direction.EAST));
         Assertions.assertThat(marsrover.move("b")).as("Mars Rover reviens en x = +50 direct EAST")
             .extracting(Position::getX, Position::getY, Position::getDirection)
             .containsExactly(50, -49, Direction.EAST);
@@ -82,10 +82,10 @@ class MarsRoverTest {
 
     @Test
     void move_spherical_map_command_bb() {
-        marsrover.initialize(Position.of(-50, 34, Direction.WEST));
+        marsrover.initialize(Position.of(-49, 34, Direction.WEST));
         Assertions.assertThat(marsrover.move("bb")).as("Mars Rover reviens en x = -48 direct WEST")
             .extracting(Position::getX, Position::getY, Position::getDirection)
-            .containsExactly(-48, 34, Direction.WEST);
+            .containsExactly(-47, 34, Direction.WEST);
     }
 
     @Test
@@ -98,10 +98,10 @@ class MarsRoverTest {
 
     @Test
     void move_spherical_map_command_rff() {
-        marsrover.initialize(Position.of(27, -50, Direction.NORTH));
+        marsrover.initialize(Position.of(27, -49, Direction.NORTH));
         Assertions.assertThat(marsrover.move("rff")).as("Mars Rover reviens en x = -25 direct NORTH")
             .extracting(Position::getX, Position::getY, Position::getDirection)
-            .containsExactly(29, -50, Direction.EAST);
+            .containsExactly(29, -49, Direction.EAST);
     }
 
 
