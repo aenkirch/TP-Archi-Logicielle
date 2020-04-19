@@ -1,44 +1,58 @@
 package server.springboot;
 
 import com.esiea.tp4A.domain.*;
-import com.sun.net.httpserver.HttpServer;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.PostMapping;
+import server.springboot.models.*;
 
-import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.util.*;
-
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 
 @SpringBootApplication
 @RestController
 public class Controller {
 
+    final Set<Global> listGlobal = new HashSet<Global>();
     final Set<Players> list = new HashSet<Players>();
+    final Set<LocalMap> listLocalMap = new HashSet<>();
+    final int laser = 3;
 
-    @PostMapping("/api/player/{playername}")
-    public ResponseEntity<?> createPlayer(@PathVariable("playername") String name) {
+
+    @PostMapping("/player/{playername}")
+    public Object createPlayer(@PathVariable("playername") String name) {
         for (Players p : list) {
             if (p.getName().equals(name))
                 return ResponseEntity.status(409).body("Oups ! Le joueur existe déjà...");
         }
-
-        MarsRover rover1 = new MarsRoverImpl().initialize(Position.of(0, 0, Direction.EAST));
-        Players player1 = new Players(list.size(),name,rover1,0);
+        Random random = new Random();
+        PlanetMap planetMap = new PlanetMapImpl();
+        int sizeMap = planetMap.getHeight() * planetMap.getWidth();
+        MarsRover rover1 = new MarsRoverImpl().initialize(Position.of(random.nextInt()%planetMap.getWidth(), random.nextInt()%planetMap.getHeight(), Direction.NORTH));
+        Players player1= new Players(0,name,rover1,0,true, setObstacles(sizeMap, random), laser);
+        LocalMap localMap1 = new LocalMap(setObstacles(sizeMap, random), list);
         list.add(player1);
-
-        return ResponseEntity.status(201).body(player1);
+        listLocalMap.add(localMap1);
+        Global global1 = new Global(player1, localMap1);
+        listGlobal.add(global1);
+        Global pl2 = listGlobal.iterator().next();
+        return ResponseEntity.status(201).body(pl2);
     }
 
-    @GetMapping("/api/player/{playername}")
-    public ResponseEntity<?> getPlayerStatus(@PathVariable("playername") String name) {
+    private Set<Position> setObstacles(int mapSize, Random random){
+        Set<Position> obstacles = new HashSet<>();
+        for(int i = 0; i < 0.15*(mapSize) ; i++){
+            int x = random.nextInt()%mapSize;
+            int y = random.nextInt()%mapSize;
+            Position pos = Position.of(x, y, Direction.NORTH);
+            obstacles.add(pos);
+        }
+        return obstacles;
+    }
+
+
+    @GetMapping("/player/{playername}")
+    public Object getPlayerStatus(@PathVariable("playername") String name) {
         for (Players p : list) {
             if (p.getName().equals(name))
                 return ResponseEntity.status(200).body(p);
@@ -47,7 +61,7 @@ public class Controller {
         return ResponseEntity.status(404).body("Le joueur n'existe pas !");
     }
 
-    @PatchMapping("/api/player/{playername}/{command}")
+    @PatchMapping("/player/{playername}/{command}")
     public ResponseEntity<?> driveRover(@PathVariable("playername") String name, @PathVariable("command") String command) {
         for (Players p : list) {
             if (p.getName().equals(name)){
