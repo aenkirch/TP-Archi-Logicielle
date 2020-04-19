@@ -31,7 +31,7 @@ public class Controller {
         }
 
         MarsRover rover1 = new MarsRoverImpl().initialize(Position.of(0, 0, Direction.EAST));
-        Players player1 = new Players(0,name,rover1,0);
+        Players player1 = new Players(list.size(),name,rover1,0); // TODO : incrémenter l'id
         list.add(player1);
 
         return ResponseEntity.status(201).body(player1);
