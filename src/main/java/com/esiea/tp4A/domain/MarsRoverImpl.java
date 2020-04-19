@@ -115,8 +115,8 @@ public class MarsRoverImpl implements MarsRover {
 
     public int spherique(int x) {
         if (x > 50) {
-            x = -50;
-        } else if (x < -50) {
+            x = -49;
+        } else if (x < -49) {
             x = 50;
         }
         return x;
