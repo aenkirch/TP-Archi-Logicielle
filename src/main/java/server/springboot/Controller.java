@@ -24,7 +24,7 @@ public class Controller {
     final Set<Players> list = new HashSet<Players>();
 
     @PostMapping("/api/player/{playername}")
-    public ResponseEntity<?> player(@PathVariable("playername") String name) {
+    public ResponseEntity<?> createPlayer(@PathVariable("playername") String name) {
         for (Players p : list) {
             if (p.getName().equals(name))
                 return ResponseEntity.status(409).body("Oups ! Le joueur existe déjà...");
@@ -37,8 +37,18 @@ public class Controller {
         return ResponseEntity.status(201).body(player1);
     }
 
+    @GetMapping("/api/player/{playername}")
+    public ResponseEntity<?> getPlayerStatus(@PathVariable("playername") String name) {
+        for (Players p : list) {
+            if (p.getName().equals(name))
+                return ResponseEntity.status(200).body(p);
+        }
+
+        return ResponseEntity.status(404).body("Le joueur n'existe pas !");
+    }
+
     @GetMapping("/api/player/{playername}/deplc")
-    public Players player2() {
+    public Players deplacerPlayer() {
         list.iterator().next().getRover().initialize(Position.of(10,10,Direction.NORTH));
 
 
