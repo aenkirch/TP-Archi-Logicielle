@@ -47,14 +47,16 @@ public class Controller {
         return ResponseEntity.status(404).body("Le joueur n'existe pas !");
     }
 
-    //TODO: créer la route PATCH
+    @PatchMapping("/api/player/{playername}/{command}")
+    public ResponseEntity<?> driveRover(@PathVariable("playername") String name, @PathVariable("command") String command) {
+        for (Players p : list) {
+            if (p.getName().equals(name)){
+                p.getRover().move(command);
+                return ResponseEntity.status(200).body(p);
+            }
+        }
 
-    @GetMapping("/api/player/{playername}/deplc")
-    public Players deplacerPlayer() {
-        list.iterator().next().getRover().initialize(Position.of(10,10,Direction.NORTH));
-
-
-        return list.iterator().next();
+        return ResponseEntity.status(404).body("Le joueur n'existe pas !");
     }
 
 }
