@@ -31,7 +31,7 @@ public class Controller {
         }
 
         MarsRover rover1 = new MarsRoverImpl().initialize(Position.of(0, 0, Direction.EAST));
-        Players player1 = new Players(list.size(),name,rover1,0); // TODO : incrémenter l'id
+        Players player1 = new Players(list.size(),name,rover1,0);
         list.add(player1);
 
         return ResponseEntity.status(201).body(player1);
@@ -46,6 +46,8 @@ public class Controller {
 
         return ResponseEntity.status(404).body("Le joueur n'existe pas !");
     }
+
+    //TODO: créer la route PATCH
 
     @GetMapping("/api/player/{playername}/deplc")
     public Players deplacerPlayer() {
